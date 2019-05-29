@@ -1,9 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
-void main() async {
+void main() {
   runApp(MyApp());
 }
 
@@ -30,15 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  File _image;
-
-  Widget showImage() {
-    if (_image == null) {
-      return Text('No image selected.');
-    } else {
-      return Image.file(_image, width: 250.0,); 
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -51,32 +42,20 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            showImage(),
+            Text('Show something here...'),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 RaisedButton(
                   child: Text('ถ่ายภาพ'),
                   onPressed: () async {
-                    var file = await ImagePicker.pickImage(source: ImageSource.camera);
-
-                    print(file.path);
-
-                    setState(() {
-                      _image = file;
-                    });
+                    
                   },
                 ),
                 RaisedButton(
                   child: Text('เลือกรูปภาพ'),
                   onPressed: () async {
-                    var file = await ImagePicker.pickImage(source: ImageSource.gallery);
-
-                    print(file.path);
-
-                    setState(() {
-                      _image = file;
-                    });
+                    
                   },
                 )
               ],
