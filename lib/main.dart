@@ -68,6 +68,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 RaisedButton(
+                  child: Text('ถ่ายวิดีโอ'),
+                  onPressed: () async {
+                    var file = await ImagePicker.pickVideo(source: ImageSource.camera);
+
+                    print(file.path);
+
+                    setState(() {
+                      _image = file;
+                    });
+                  },
+                ),
+                RaisedButton(
                   child: Text('เลือกรูปภาพ'),
                   onPressed: () async {
                     var file = await ImagePicker.pickImage(source: ImageSource.gallery);
