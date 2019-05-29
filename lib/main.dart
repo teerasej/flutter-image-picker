@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:chewie/chewie.dart';
+import 'package:video_player/video_player.dart';
 
 void main() async {
   runApp(MyApp());
@@ -31,18 +32,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   bool _isMovie = false;
-  File _image;
-
+  File _file;
+  VideoPlayerController _videoPlayerController;
+  ChewieController _chewieController;
 
   Widget showImage() {
-    if (_image == null) {
+    if (_file == null) {
       return Text('No image selected.');
-    } else if (!_isMovie){
-      return Image.file(_image, width: 250.0,); 
+    } else if (!_isMovie) {
+      return Image.file(
+        _file,
+        width: 250.0,
+      );
     } else {
-      return Text('Video Player');
+      _videoPlayerController = VideoPlayerController.file(_file);
+      _chewieController = ChewieController(
+        videoPlayerController: _videoPlayerController,
+        aspectRatio: 16/9,
+        allowFullScreen: true
+      );
+
+      return Chewie(controller: _chewieController,);
     }
   }
 
@@ -70,38 +81,41 @@ class _MyHomePageState extends State<MyHomePage> {
                 RaisedButton(
                   child: Text('ถ่ายภาพ'),
                   onPressed: () async {
-                    var file = await ImagePicker.pickImage(source: ImageSource.camera);
+                    var file =
+                        await ImagePicker.pickImage(source: ImageSource.camera);
 
                     print(file.path);
 
                     setState(() {
                       _isMovie = false;
-                      _image = file;
+                      _file = file;
                     });
                   },
                 ),
                 RaisedButton(
                   child: Text('ถ่ายวิดีโอ'),
                   onPressed: () async {
-                    var file = await ImagePicker.pickVideo(source: ImageSource.camera);
+                    var file =
+                        await ImagePicker.pickVideo(source: ImageSource.camera);
 
                     print(file.path);
 
                     setState(() {
                       _isMovie = true;
-                      _image = file;
+                      _file = file;
                     });
                   },
                 ),
                 RaisedButton(
                   child: Text('เลือกรูปภาพ'),
                   onPressed: () async {
-                    var file = await ImagePicker.pickImage(source: ImageSource.gallery);
+                    var file = await ImagePicker.pickImage(
+                        source: ImageSource.gallery);
 
                     print(file.path);
 
                     setState(() {
-                      _image = file;
+                      _file = file;
                     });
                   },
                 )
