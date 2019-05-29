@@ -30,12 +30,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   File _image;
 
   Widget showImage() {
-
-    if(_image == null){
+    if (_image == null) {
       return Text('No image selected.');
     } else {
       return Image.file(_image);
@@ -58,10 +56,11 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 RaisedButton(
-                  child: Text('ถ่ายภาพ'), 
+                  child: Text('ถ่ายภาพ'),
                   onPressed: () async {
-
                     var file = await ImagePicker.pickImage(source: ImageSource.camera);
+
+                    print(file.path);
 
                     setState(() {
                       _image = file;
@@ -69,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('เลือกรูปภาพ'), 
+                  child: Text('เลือกรูปภาพ'),
                   onPressed: () {},
                 )
               ],
