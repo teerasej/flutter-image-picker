@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_image == null) {
       return Text('No image selected.');
     } else {
-      return Image.file(_image);
+      return Image.file(_image, width: 250.0,); 
     }
   }
 
