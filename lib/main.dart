@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:chewie/chewie.dart';
 
 void main() async {
   runApp(MyApp());
@@ -30,14 +31,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  bool _isMovie = false;
   File _image;
+
 
   Widget showImage() {
     if (_image == null) {
       return Text('No image selected.');
-    } else {
+    } else if (!_isMovie){
       return Image.file(_image, width: 250.0,); 
+    } else {
+      return Text('Video Player');
     }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -63,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     print(file.path);
 
                     setState(() {
+                      _isMovie = false;
                       _image = file;
                     });
                   },
@@ -75,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     print(file.path);
 
                     setState(() {
+                      _isMovie = true;
                       _image = file;
                     });
                   },
