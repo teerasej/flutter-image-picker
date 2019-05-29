@@ -34,8 +34,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _isMovie = false;
   File _file;
-  VideoPlayerController _videoPlayerController;
-  ChewieController _chewieController;
 
   Widget showImage() {
     if (_file == null) {
@@ -46,25 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 250.0,
       );
     } else {
-      _videoPlayerController = VideoPlayerController.file(_file);
-      _chewieController = ChewieController(
-        videoPlayerController: _videoPlayerController,
-        aspectRatio: 16/9,
-        allowFullScreen: true
-      );
-
-      return Chewie(controller: _chewieController,);
+      
+      return Text('Video Player here');
     }
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-
-    _chewieController.dispose();
-    _videoPlayerController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
