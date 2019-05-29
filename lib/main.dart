@@ -60,6 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
     // TODO: implement dispose
+
+    _chewieController.dispose();
+    _videoPlayerController.dispose();
     super.dispose();
   }
 
