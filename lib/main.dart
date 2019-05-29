@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -29,18 +31,45 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  
+  File _image;
 
-  
+  Widget showImage() {
+
+    if(_image == null){
+      return Text('No image selected.');
+    } else {
+      return Image.file(_image);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            showImage(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                RaisedButton(
+                  child: Text('ถ่ายภาพ'), 
+                  onPressed: () {},
+                ),
+                RaisedButton(
+                  child: Text('เลือกรูปภาพ'), 
+                  onPressed: () {},
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
