@@ -59,7 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 RaisedButton(
                   child: Text('ถ่ายภาพ'), 
-                  onPressed: () {},
+                  onPressed: () async {
+
+                    var file = await ImagePicker.pickImage(source: ImageSource.camera);
+
+                    setState(() {
+                      _image = file;
+                    });
+                  },
                 ),
                 RaisedButton(
                   child: Text('เลือกรูปภาพ'), 
