@@ -69,7 +69,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 RaisedButton(
                   child: Text('เลือกรูปภาพ'),
-                  onPressed: () {},
+                  onPressed: () async {
+                    var file = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+                    print(file.path);
+
+                    setState(() {
+                      _image = file;
+                    });
+                  },
                 )
               ],
             )
